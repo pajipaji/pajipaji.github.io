@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="文章观点： 能让用户（受众）变得更懒的设计，一定是好设计。这个是我看了很多个很火的产品设计后，总结到的一句话。废话不说，">
+  <meta name="description" content="firolls自动化（名字是自己起的）Gauge本质上一个BDD（Behavior Driven Development）测试框架。所以，首先你要了解BDD的操作方式。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="哔哩哔哩-建议篇-寻求乐趣的同时，让互动更加懒人化">
-<meta property="og:url" content="http://example.com/2020/09/08/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9-%E5%BB%BA%E8%AE%AE%E7%AF%87-%E5%AF%BB%E6%B1%82%E4%B9%90%E8%B6%A3%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E8%AE%A9%E4%BA%92%E5%8A%A8%E6%9B%B4%E5%8A%A0%E6%87%92%E4%BA%BA%E5%8C%96/index.html">
+<meta property="og:title" content="conda + guage + vscode 完成自动化的同时支持压力测试">
+<meta property="og:url" content="http://example.com/2020/10/14/conda-guage-vscode-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/index.html">
 <meta property="og:site_name" content="Ikefire&#39;s Blog">
-<meta property="og:description" content="文章观点： 能让用户（受众）变得更懒的设计，一定是好设计。这个是我看了很多个很火的产品设计后，总结到的一句话。废话不说，">
+<meta property="og:description" content="firolls自动化（名字是自己起的）Gauge本质上一个BDD（Behavior Driven Development）测试框架。所以，首先你要了解BDD的操作方式。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-09-08T08:58:06.000Z">
-<meta property="article:modified_time" content="2020-09-09T08:55:02.521Z">
+<meta property="article:published_time" content="2020-10-14T07:46:02.000Z">
+<meta property="article:modified_time" content="2020-10-14T07:50:28.714Z">
 <meta property="article:author" content="Ikefire">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2020/09/08/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9-%E5%BB%BA%E8%AE%AE%E7%AF%87-%E5%AF%BB%E6%B1%82%E4%B9%90%E8%B6%A3%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E8%AE%A9%E4%BA%92%E5%8A%A8%E6%9B%B4%E5%8A%A0%E6%87%92%E4%BA%BA%E5%8C%96/">
+<link rel="canonical" href="http://example.com/2020/10/14/conda-guage-vscode-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>哔哩哔哩-建议篇-寻求乐趣的同时，让互动更加懒人化 | Ikefire's Blog</title>
+  <title>conda + guage + vscode 完成自动化的同时支持压力测试 | Ikefire's Blog</title>
   
 
 
@@ -150,7 +150,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2020/09/08/%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9-%E5%BB%BA%E8%AE%AE%E7%AF%87-%E5%AF%BB%E6%B1%82%E4%B9%90%E8%B6%A3%E7%9A%84%E5%90%8C%E6%97%B6%EF%BC%8C%E8%AE%A9%E4%BA%92%E5%8A%A8%E6%9B%B4%E5%8A%A0%E6%87%92%E4%BA%BA%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/14/conda-guage-vscode-%E5%AE%8C%E6%88%90%E8%87%AA%E5%8A%A8%E5%8C%96%E7%9A%84%E5%90%8C%E6%97%B6%E6%94%AF%E6%8C%81%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -163,7 +163,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          哔哩哔哩-建议篇-寻求乐趣的同时，让互动更加懒人化
+          conda + guage + vscode 完成自动化的同时支持压力测试
         </h1>
 
         <div class="post-meta">
@@ -172,16 +172,10 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
+              
 
-              <time title="Created: 2020-09-08 16:58:06" itemprop="dateCreated datePublished" datetime="2020-09-08T16:58:06+08:00">2020-09-08</time>
+              <time title="Created: 2020-10-14 15:46:02 / Modified: 15:50:28" itemprop="dateCreated datePublished" datetime="2020-10-14T15:46:02+08:00">2020-10-14</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2020-09-09 16:55:02" itemprop="dateModified" datetime="2020-09-09T16:55:02+08:00">2020-09-09</time>
-              </span>
 
           
 
@@ -194,28 +188,51 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p><strong>文章观点：</strong> <code>能让用户（受众）变得更懒的设计，一定是好设计。</code>这个是我看了很多个很火的产品设计后，总结到的一句话。废话不说，<a id="more"></a>直接讲对 哔哩哔哩 的一个简单建议，和让文章观点站住脚的例子。</p>
-<p>———<br/></p>
-<p><strong>建议：</strong> <code>在每个视频下面添加一键发送弹幕的功能。</code>弹幕内容为本视频中弹幕出现次数最多的内容随机。 为懒得打字或者无法空出手来打字，但是又想发弹幕的人，一键弹幕的机会。</p>
-<p><strong>目的：</strong> 让用户的<code>参与感进一步提升</code>。</p>
-<p>———<br/></p>
-<h4 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h4><p><code>1. 王建林 - 建立户内卫生间</code></p>
-<ul>
-<li>上个世纪的房子有一个共同特点，那就是每家每户家里没有厕所，想上厕所只能出门去社区里的公共厕所，公共厕所有个通病，就是脏乱臭。王健林当时想建立户内卫生间的时候，人们都笑话他，woc他疯了，谁会在家里搞厕所，搞的家里臭死了，这玩意谁收拾。结果这房子建好，一开盘直接卖完。为什么呀！因为方便呀，晚上半夜想上厕所急得不行，不用再穿整齐出门了呀。这个设计给人们带去便利的同时，也让人变懒了呀！正是这个项目给王健林的公司带来了1000多万的利润，同时也为万达房地产的发展开了个好头。顺带一提，万达是第一个在楼里见卫生间的商场。</li>
+        <h5 id="firolls自动化（名字是自己起的）"><a href="#firolls自动化（名字是自己起的）" class="headerlink" title="firolls自动化（名字是自己起的）"></a>firolls自动化（名字是自己起的）</h5><p>Gauge本质上一个BDD（Behavior Driven Development）测试框架。所以，首先你要了解BDD的操作方式。<a id="more"></a><br><code>简单自动化写法，步骤如下：</code></p>
+<h6 id="第一步-配置环境"><a href="#第一步-配置环境" class="headerlink" title="第一步 配置环境"></a>第一步 配置环境</h6><ol>
+<li>下载Conda环境：<a target="_blank" rel="noopener" href="https://docs.conda.io/en/latest/miniconda.html">https://docs.conda.io/en/latest/miniconda.html</a><br>下载pkg包，安装。<a target="_blank" rel="noopener" href="http://www.inimei.cn/archives/897.html">http://www.inimei.cn/archives/897.html</a><br>打开控制台，输入：conda create –name cyclone python=3.8  创建一个基于py2.8的名叫cyclone的运行环境。<br>安装这个自动化框架的依赖：conda install –file requirements.txt  【requirements.txt】是这个文件的相对位置<br>激活并切换到 cyclone 环境： conda activate cyclone</li>
+<li>安装gauge <a target="_blank" rel="noopener" href="https://docs.gauge.org/getting_started/installing-gauge.html?os=macos&amp;language=python&amp;ide=vscode">https://docs.gauge.org/getting_started/installing-gauge.html?os=macos&amp;language=python&amp;ide=vscode</a><br>brew install gauge<br>在vscode上搜索安装 gauge 然后重启vscode<br>运行：gauge run specs/incoming/order.md</li>
+</ol>
+<h6 id="第二步-vscode一顿乱搞"><a href="#第二步-vscode一顿乱搞" class="headerlink" title="第二步 vscode一顿乱搞"></a>第二步 vscode一顿乱搞</h6><ol>
+<li>vscode安装guage插件</li>
+<li>使用guage创建测试项目<ul>
+<li>Cmd + shift + p</li>
+<li>create a new guage project</li>
+<li>选择python</li>
+<li>选择一个文件夹新建项目</li>
+<li>为新项目起一个名字</li>
+<li>OK</li>
 </ul>
-<p><code>2. 扫地机器人</code></p>
-<ul>
-<li>2019年中国扫地机器人市场销量和销售额分别为532万台和79亿元，可见扫地机器人的市场有多火热。说到底还是不想做家务，没时间做家务，做家务累呀。有个机器人，也不费电，没电了自己会充电，家里哪脏扫哪，比人的眼力劲都强。节约了人的时间，提升了生活的幸福感，说到底是让人更懒了。</li>
+</li>
+<li>开始写代码<ul>
+<li>执行文件位于 /specs/example.spec sepcs文件下</li>
+<li>点击 run scenario 或者 bebug scenario 运行（运行例子，在.spec文件可以直接点类似链接的debug和run）</li>
+<li>运行所有用例 gauge run specs</li>
+<li>运行结束后，在控制台可见运行结果</li>
+<li>可以点击编译器底部小对号查看网页版运行报告  或者  com+shift+p Show Last Run Report 快捷键</li>
+<li>至此，简单的例子就结束了。</li>
 </ul>
-<p><code>3. 自动洗碗机</code></p>
-<ul>
-<li>洗碗是比扫地更让人头疼的事。但是洗碗机出现的时候，几乎没人买，为啥，因为买了会被邻居笑话懒。后来是怎么卖出去的呢，是和房地产开发商谈合租，把洗碗机欠到厨房里，合着就是买房子附带洗碗机，这样即能堵住邻居的嘴，也能巧妙的偷懒。没想到这样的房子卖的又是很火。</li>
+</li>
+<li>关于例子什么位置改写什么的讲解如下：<ul>
+<li>env是环境，安全性高的代码需要将各种域名、数据库密码都写在一个外部文件里，使用的时候去主动访问即可。</li>
+<li>logs 是执行报告，这里的样式可自行调整。</li>
+<li>spec 这里写用例</li>
+<li>step_impl这里写用例对照的执行代码</li>
 </ul>
-<p><code>4. 反例 - 榨汁机</code></p>
-<ul>
-<li>榨汁机这个东西，买过的人一定知道，买之前看的广告啊，商场促销啊，工作人员榨好给你一喝，嗯～好！方便。买回家就发现，榨完喝着是挺爽，可榨完还要洗啊，洗榨汁机是最麻烦的事，所以榨汁机买回家直接就吃灰了。你会发现几乎不用，不用。所以听到要是身边有人要买榨汁机的时候，你肯定第一句话是：别买别买，这玩意清洗起来烦得很。</li>
+</li>
+<li>根据这个guage项目，可以自行拓展出新的抽象框架<ul>
+<li>spec 写用例的名字和校验的内容，支持用双引号传参数</li>
+<li>step_impl 写assert校验，或者请求结果处理后输出</li>
+<li>api 拆分出的step_impl里用到的方法，专门写出一个类来处理</li>
+<li>out_api 这里写对python本身提供的包的方法比如request请求的封装</li>
+<li>env 这里写所有api里面用到的环境的集合 和 配置log输出的内容和输出位置</li>
+<li>至此，OK</li>
 </ul>
-<h6 id="现在去看-美团外卖、饿了么、叮咚买菜，这个那个的，想要什么直接平台给送到家门口。还是抓住了懒这个点。"><a href="#现在去看-美团外卖、饿了么、叮咚买菜，这个那个的，想要什么直接平台给送到家门口。还是抓住了懒这个点。" class="headerlink" title="现在去看 美团外卖、饿了么、叮咚买菜，这个那个的，想要什么直接平台给送到家门口。还是抓住了懒这个点。"></a>现在去看 美团外卖、饿了么、叮咚买菜，这个那个的，想要什么直接平台给送到家门口。还是抓住了懒这个点。</h6>
+</li>
+<li>关于requirements.txt文件，这里可以写上所有要用到的外部依赖包，然后方便下载</li>
+</ol>
+<h6 id="第三步-熟悉python3的常用依赖包和自己封装，开始手写。"><a href="#第三步-熟悉python3的常用依赖包和自己封装，开始手写。" class="headerlink" title="第三步 熟悉python3的常用依赖包和自己封装，开始手写。"></a>第三步 熟悉python3的常用依赖包和自己封装，开始手写。</h6><h6 id="第四步-压力测试"><a href="#第四步-压力测试" class="headerlink" title="第四步 压力测试"></a>第四步 压力测试</h6><p>待续。。。</p>
+
     </div>
 
     
@@ -230,13 +247,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2020/09/08/%E8%B6%A3%E5%A4%B4%E6%9D%A1-%E7%89%88%E6%9C%AC%E5%88%86%E6%9E%90/" rel="prev" title="趣头条-版本分析">
-      <i class="fa fa-chevron-left"></i> 趣头条-版本分析
+    <a href="/2020/10/13/Guage%E7%AC%94%E8%AE%B0/" rel="prev" title="Guage笔记">
+      <i class="fa fa-chevron-left"></i> Guage笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2020/09/10/%E9%A5%BF%E4%BA%86%E4%B9%88-%E7%BC%93%E8%A7%A3%E9%AA%91%E6%89%8B%E9%97%AF%E7%BA%A2%E7%81%AF%E6%96%B9%E6%A1%88/" rel="next" title="饿了么-缓解骑手闯红灯方案">
-      饿了么-缓解骑手闯红灯方案 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -295,7 +309,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">例子：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%8E%B0%E5%9C%A8%E5%8E%BB%E7%9C%8B-%E7%BE%8E%E5%9B%A2%E5%A4%96%E5%8D%96%E3%80%81%E9%A5%BF%E4%BA%86%E4%B9%88%E3%80%81%E5%8F%AE%E5%92%9A%E4%B9%B0%E8%8F%9C%EF%BC%8C%E8%BF%99%E4%B8%AA%E9%82%A3%E4%B8%AA%E7%9A%84%EF%BC%8C%E6%83%B3%E8%A6%81%E4%BB%80%E4%B9%88%E7%9B%B4%E6%8E%A5%E5%B9%B3%E5%8F%B0%E7%BB%99%E9%80%81%E5%88%B0%E5%AE%B6%E9%97%A8%E5%8F%A3%E3%80%82%E8%BF%98%E6%98%AF%E6%8A%93%E4%BD%8F%E4%BA%86%E6%87%92%E8%BF%99%E4%B8%AA%E7%82%B9%E3%80%82"><span class="nav-number">1.0.1.</span> <span class="nav-text">现在去看 美团外卖、饿了么、叮咚买菜，这个那个的，想要什么直接平台给送到家门口。还是抓住了懒这个点。</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#firolls%E8%87%AA%E5%8A%A8%E5%8C%96%EF%BC%88%E5%90%8D%E5%AD%97%E6%98%AF%E8%87%AA%E5%B7%B1%E8%B5%B7%E7%9A%84%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">firolls自动化（名字是自己起的）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83"><span class="nav-number">1.1.</span> <span class="nav-text">第一步 配置环境</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-vscode%E4%B8%80%E9%A1%BF%E4%B9%B1%E6%90%9E"><span class="nav-number">1.2.</span> <span class="nav-text">第二步 vscode一顿乱搞</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E7%86%9F%E6%82%89python3%E7%9A%84%E5%B8%B8%E7%94%A8%E4%BE%9D%E8%B5%96%E5%8C%85%E5%92%8C%E8%87%AA%E5%B7%B1%E5%B0%81%E8%A3%85%EF%BC%8C%E5%BC%80%E5%A7%8B%E6%89%8B%E5%86%99%E3%80%82"><span class="nav-number">1.3.</span> <span class="nav-text">第三步 熟悉python3的常用依赖包和自己封装，开始手写。</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.</span> <span class="nav-text">第四步 压力测试</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
