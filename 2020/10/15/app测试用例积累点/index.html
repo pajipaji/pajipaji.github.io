@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="安卓和ios的手机关于app的功能测试点积累，和设计测试用例的出发点：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="app测试用例积累点">
+<meta property="og:url" content="http://example.com/2020/10/15/app%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%A7%AF%E7%B4%AF%E7%82%B9/index.html">
+<meta property="og:site_name" content="Ikefire&#39;s Blog">
+<meta property="og:description" content="安卓和ios的手机关于app的功能测试点积累，和设计测试用例的出发点：">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-10-15T07:25:11.000Z">
+<meta property="article:modified_time" content="2020-10-15T07:47:25.010Z">
+<meta property="article:author" content="Ikefire">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/10/15/app%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%A7%AF%E7%B4%AF%E7%82%B9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>app测试用例积累点 | Ikefire's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ikefire's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/10/15/app%E6%B5%8B%E8%AF%95%E7%94%A8%E4%BE%8B%E7%A7%AF%E7%B4%AF%E7%82%B9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ikefire">
+      <meta itemprop="description" content="猪皮恶霸的妞妞猪。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ikefire's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          app测试用例积累点
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-10-15 15:25:11 / Modified: 15:47:25" itemprop="dateCreated datePublished" datetime="2020-10-15T15:25:11+08:00">2020-10-15</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>安卓和ios的手机关于app的功能测试点积累，和设计测试用例的出发点：<a id="more"></a></p>
+<h4 id="App的安装和卸载"><a href="#App的安装和卸载" class="headerlink" title="App的安装和卸载"></a>App的安装和卸载</h4><ol>
+<li>安装<ul>
+<li>软件在不同操作系统上是否安装正常</li>
+<li>软件在不同手机型号上是否安装正常</li>
+<li>软件在不同屏幕分辨率/屏幕尺寸上是否安装正常</li>
+<li>软件安装过程中，意外情况（死机、断电、重启）的处理是否符合需求</li>
+<li>安装空间不足（内存和磁盘空间不足）是否有相应的提示</li>
+<li>首次安装完成后，是否正常启动app</li>
+<li>版本覆盖安装后，是否正常启动app<br><br/><br/></li>
+</ul>
+</li>
+<li>卸载<ul>
+<li>卸载过程中，出现的意外情况（如死机、断电、重启）的处理是否符合需求说明</li>
+<li>卸载完成后，是否全部删除所有的安装文件夹</li>
+<li>第三方卸载，检查是否卸载完全</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="App的界面测试"><a href="#App的界面测试" class="headerlink" title="App的界面测试"></a>App的界面测试</h4><ol>
+<li>导航测试<ul>
+<li>按钮：按钮的可点击的条件，按钮按下的效果，按钮的的跳转引导等，如‘登录’按钮，输入账号和密码才会高亮显示为可点击状态</li>
+<li>目录：很多APP会在主页的右侧显示软件内容的目录结构供用户便捷有目的的浏览，也有的软件会放在顶部区域或底部区域，测试显示布局的正确性和跳转的正确性等</li>
+<li>菜单：右上角的‘···’一般是隐形的菜单，需要查看这些菜单是可配置的，还是固定的，已经显示文字的长短是否正常，跳转是否正确</li>
+<li>弹框：APP包含消息弹框/确认框/信息提示框/表单提交框等等，很多类型的弹框都会引导用户去其他页面，查看弹框中信息显示是否完整，点击不同按钮，是否如需求说明一样正确跳转</li>
+<li>列表：APP的列表分页其实不明显，一般不会明确的标示是第几页，但是在服务端是存在分页，查看是否存复用的问题<br><br/><br/></li>
+</ul>
+</li>
+<li>图形测试  图形包括图片、动画、边框、颜色、字体、背景、按钮等<ul>
+<li>横向比较。各控件操作方式是否统一，页面标签风格是否统一</li>
+<li>自适应界面设计（屏幕尺寸，屏幕分辨率），图形根据窗口大小自适应</li>
+<li>横屏/竖屏测试：游戏/图片/视频均有横竖屏自动切换，很多手机网站也做了横竖屏自适应，观察横屏或者竖屏页面的显示效果</li>
+<li>图片、动画、边框、颜色、字体、背景、按钮等动画效果是否符合需求设计</li>
+<li>图片或者动画的收起效果是否符合需求设计</li>
+<li>图片来源是用户自己上传/本地的/服务端配置的，查看图片在APP端的显示效果<br><br/><br/></li>
+</ul>
+</li>
+<li>内容测试  检验APP应用程序提供信息的正确性、准确性和相关性<ul>
+<li>页面显示文案：文案是否表意不明，是否有错别字，是否有敏感性词汇，是否布局和设计一致，是否不同的屏幕尺寸/屏幕分辨率的手机上显示完整，文案来源是本地的还是后台可以配置的，文案的长短是否有限制等</li>
+<li>文本输入框：输入框的默认文案是否清楚正确，文字长度是否限制，输入的文字是否有敏感性词汇限制，达到最大长度是否允许继续输入，删除输入的内容是否再显示默认文案，输入过程光标是否一直显示在字的末尾等</li>
+<li>按钮上的文案：文案是否在边框内，文案的颜色是否正常，文案在点击效果下是否正常显示，文案在不同的屏幕尺寸/屏幕分辨率的手机上显示是否正常，文案表明意思和实际的操作是否相匹配等</li>
+<li>链接上的文案：一般的协议文案的内容和连接的协议一致，链接文案的颜色是否显示正确</li>
+<li>图形上的文案：文案是否表意不明，是否有错别字，是否有敏感性词汇，是否布局和设计一致，是否不同的屏幕尺寸/屏幕分辨率的手机上显示完整，文案来源是本地的还是后台可以配置的，文案的长短是否有限制，文案是否在图形边框内等</li>
+<li>确认信息文案：显示的文案是否和用户所填的信息保持一致，是否布局和设计一致，是否不同的屏幕尺寸/屏幕分辨率的手机上显示完整等</li>
+<li>提示信息文案：包含消息通知框，操作提示框，引导框等，一般这些提示信息框都包含了很多逻辑，测试对应逻辑下提示的信息是否正确<br><br/><br/></li>
+</ul>
+</li>
+<li>表格测试<ul>
+<li>标题行：有无标题行，标题行是否居中显示，标题行的单元格是否禁止编辑</li>
+<li>标题列：有无标题列(不一定)，标题列是否居左显示(不一定)，标题列中的单元格是否禁止编辑</li>
+<li>非标题行/列：非标题行/列中的单元格是否允许编辑(不一定)，非标题行/列中的单元格允许编辑时，参考文本框控件进行测试；</li>
+<li>同一数据类型：所在行/列的单元格是否有统一的居左、居中、居右显示方式；</li>
+<li>日期型数据：所在行/列单元格的内容显示格式是否一致；</li>
+<li>时间型数据：所在行/列单元格内容显示格式是否一致；</li>
+<li>货币型数据：所在行/列单元格的内容显示格式是否一致；</li>
+<li>小数型数据：所在行/列单元格的内容显示格式是否一致；</li>
+<li>当前所在的单元格：是否提供突出显示功能，前景/背景色、字体、字号是否正确；换行、换列时，所在单元格和非所在的显示是否正确；</li>
+<li>当前选中的单元格：是否提供突出显示功能，前景/背景色、字体、字号是否正确；换行、换列时，选中单元格和非选中的显示是否正确；</li>
+<li>当前所在行/列：是否提供突出显示功能，前景/背景色、字体、字号是否正确。换行、换页时，突出显示的行显示是否正确；</li>
+<li>排序功能：某列是否具有自动排序功能(不一定)。比如日期型列提供有这样的功能：点击一次为从小到大排序，再点击为从大到小排序，查看点击后的执行效果是否正确；</li>
+<li>翻页功能：是否有默认数据条数，每页是否显示正常，是否有复用情况</li>
+<li>图片功能：是否存在图片，图片显示是否正常；是否可点击，点击后跳转是否正常</li>
+<li>滑动功能：上下多次连续是否会有显示正常，数据展示完全，页面底部是否有提示<br><br/><br/></li>
+</ul>
+</li>
+<li>H5界面测试<ul>
+<li>兼容性：H5页面在不同的手机操作系统/不同手机品牌/屏幕尺寸/屏幕分辨率的手机上显示是否正常<br><br/><br/></li>
+</ul>
+</li>
+<li>整体界面测试   整个APP应用程序的页面结构设计，是给用户一格整体感<ul>
+<li>测试界面设计是否合理、简洁、美观，操作是否方便；功能键、数据项信息是否齐全</li>
+<li>确认系统中同一功能的名称是否统一；同一个功能按钮，不同模块相同的错误提示信息是否统一</li>
+<li>不同模块相同字段值的输入方式是否统一</li>
+<li>所有弹出窗口显示位置是否统一</li>
+<li>设计样式、风格（查询条件样式；输入风格（点选/手输入））是否与系统其它模块统一</li>
+<li>确认页面内所有字段名称显示风格是否统一（居中、左对齐、右对齐，一般采用居中显示风格）</li>
+<li>添加/修改保存后，添加/修改界面是否自动关闭要求统一（建议修改保存后，修改界面一般是自动关闭）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="App的业务功能测试"><a href="#App的业务功能测试" class="headerlink" title="App的业务功能测试"></a>App的业务功能测试</h4><ol>
+<li>APP的常规性业务功能测试  界面、数据、操作、逻辑、接口<ul>
+<li>界面测试：指测试系统界面整体布局的合理性，以及是否清晰/美观，包括颜色搭配/字体/文字是否对齐/图片大小与位置/弹出窗口的位置是否合适。其次还会测试用户是否可以调整布局/是否自定义界面（包括文字/图片/颜色等）。</li>
+<li>数据测试：指接受正确的数据输入，并对一次数据的输入有提示和容错处理。</li>
+<li>操作测试：指用户操作菜单/按钮/链接/滑动/输入等对APP应用程序的操作，是否符合操作习惯，是否有正确的提示等等。</li>
+<li>逻辑测试：指某个操作需要多个步骤实现，应有清楚的提示，或者向导来帮助用户完成，某项功能，从不同的入口进入有不同的操作路径，但是逻辑上应该是一致，系统的各种状态要按照业务流程变化保持稳定。</li>
+<li>接口测试：指让接口配合多种硬件或者内部接口/外部接口，应保持其规范性/一致性/完备性，接口还需要是可定义或者可配置的，应具有良好的兼容性和扩充性。<br><br/><br/></li>
+</ul>
+</li>
+<li>APP功能测试的特殊性  应用的前后台切换、免登录、数据更新、离线浏览、系统权限等<ul>
+<li>APP切换到后台，再打开APP，检查是否停留在上一次操作界面，检查功能是否正常、程序是否崩溃、数据是否更新</li>
+<li>手机锁屏解锁后进入APP，检查是否停留在上一次操作界面，检查功能是否正常、程序是否崩溃、数据是否更新</li>
+<li>APP使用过程中被电话中断，再回到APP，检查是否停留在上一次操作界面，检查功能是否正常、数据是否更新</li>
+<li>Kill掉APP后，再打开APP，检查功能是否正常、数据是否更新、用户登录状态是否正常</li>
+<li>存在必须处理的提示框，切换到后台，再切换到前台，检查提示框是否存在</li>
+<li>APP使用过程中，出现断电/意外关机重启等异常情况，再次打开APP，检查APP功能是否正常<br><br/><br/></li>
+</ul>
+</li>
+<li>免登录测试     非银行/金融等大部分APP都有免登录功能，打开APP，检查登录状态是否是最近一次登录的用户<ul>
+<li>APP切换到后台，再打开APP，检查登录状态是否是最近一次登录的用户</li>
+<li>Kill APP，再打开APP，检查登录状态是否是最近一次登录的用户</li>
+<li>无网络情况，打开APP，检查登录状态是否是最近一次登录的用户</li>
+<li>手机重启，打开APP，检查登录状态是否是最近一次登录的用户</li>
+<li>切换账号登录，检查APP内的登录用户是否是当前登录账号，数据信息和当前账号是否保持一致</li>
+<li>用户登出APP后，再打开APP，检查APP的登录状态是否为未登录状态</li>
+<li>同一账号登录到多台设备（需求允许），检查多台设备的免登录状态是否正常</li>
+<li>用户更换密码后，有数据交互时，检查是否会再次进行身份的验证</li>
+<li>存在免登录日期限制的，检查在限制的日期外的登录状态是否为未登录</li>
+<li>token过程 APP利用token机制进行身份认证的加密解密步骤（RSA非对称加密算法）：<ul>
+<li>客户端向服务器第一次发起登录请求（不传输用户名和密码）。</li>
+<li>服务器利用RSA算法产生一对公钥和私钥。并保留私钥， 将公钥发送给客户端。</li>
+<li>客户端收到公钥后， 加密用户密码，向服务器发送用户名和加密后的用户密码； 同时另外产生一对公钥和私钥，自己保留私钥, 向服务器发送公钥； 于是第二次登录请求传输了用户名和加密后的密码以及客户端生成的公钥。</li>
+<li>服务器利用保留的私钥对密文进行解密，得到真正的密码。 经过判断， 确定用户可以登录后，生成sessionId和token， 同时利用客户端发送的公钥，对token进行加密。最后将sessionId和加密后的token返还给客户端。</li>
+<li>客户端利用自己生成的私钥对token密文解密， 得到真正的token。<br><br/><br/></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>数据更新   手动更新和自动更新<ul>
+<li>手动更新：上拉/下拉/上滑/下滑更新数据，检查更新的数据是否正确，更新的列表是否存在头像或者数据复用的问题</li>
+<li>手动更新：更新过程中的动画效果是否符合符合需求设计</li>
+<li>自动实时更新：自动更新的频率/自动更新的数据量是否符合需求设计</li>
+<li>自动实时更新：自动更新过程中，考虑用户是否让用户感知，是静默更新还是通知更新？</li>
+<li>自动定时更新：根据设定的时间，检查更新的数据是否正确（如：报表/抢购等）</li>
+<li>筛选数据：筛选的数据请求很多都是从本地取值，检查无网络能否正常筛选</li>
+<li>前后台切换：有数据更新后，再次打开APP，APP显示正常<br><br/><br/></li>
+</ul>
+</li>
+<li>离线浏览   无网络状态浏览APP的内容，即客户端会缓存一部分数据供用户查看<ul>
+<li>无网络情况：根据APP的特性，是否允许查看存放在本地的部分内容（如某些小说类APP，本地游戏类APP，学习软件类APP等）</li>
+<li>无网络情况：APP切换到后台，再切换到前台，能否正常浏览部分内容（如缓存好的视频/音乐等）</li>
+<li>无网络情况：Kill掉APP，再打开APP，能否正常浏览部分内容（如缓存好的视频/音乐等）</li>
+<li>无网络情况：手机锁屏解锁后进入APP，能否正常浏览部分内容（如缓存好的视频/音乐等）</li>
+<li>无网络情况：浏览需要请求服务端的内容时候，检查是否给予了无网络的提示</li>
+<li>无网络情况：提交表单时，对于后台提交的请求，检查在连网后是否请求成功<br><br/><br/></li>
+</ul>
+</li>
+<li>系统权限   一般APP会询问用户定位权限、网络权限、相册权限、相机权限、通知权限<ul>
+<li>定位权限：定位权限关闭，打开APP，检查APP中涉及定位权限的功能是否正常</li>
+<li>网络权限：网络权限关闭，打开APP，检查APP中涉及网络请求的功能是否正常</li>
+<li>相册权限：相册权限关闭，打开APP，检查APP中涉及相册权限的功能是否正常</li>
+<li>相机权限：相机权限关闭，打开APP，检查APP中涉及相机权限的功能是否正常</li>
+<li>通知权限：通知权限关闭，打开APP，检查APP中涉及通知权限的功能是否正常</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="App交叉事件测试-事件冲突测试"><a href="#App交叉事件测试-事件冲突测试" class="headerlink" title="App交叉事件测试   事件冲突测试"></a>App交叉事件测试   事件冲突测试</h4><ol>
+<li>一个功能正在执行过程中，同时另外一个事件或操作对该过程进行干扰的测试<ul>
+<li>同一手机设备上，多个APP同时运行，检查是否影响APP应用程序正常功能使用</li>
+<li>APP使用过程中，前/后台切换，检查是否影响正常功能使用</li>
+<li>APP使用过程中，拨打/接听电话，检查是否影响正常功能使用</li>
+<li>APP使用过程中，发送/接收信息，检查是否影响正常功能使用</li>
+<li>APP使用过程中，发送/收取邮件，检查是否影响正常功能使用</li>
+<li>APP使用过程中，切换网络（4G、wifi），检查是否影响正常功能使用</li>
+<li>APP使用过程中，使用蓝牙传送/接收数据，检查是否影响正常功能使用</li>
+<li>APP使用过程中，使用使用相机、计算器等手机自带的应用功能，检查是否影响正常功能使用</li>
+<li>APP使用过程中，正在使用其他APP收听音乐，检查APP的声音功能是否正常</li>
+<li>APP使用过程中，APP有声音调大调小功能，检查APP的声音调节功能是否和手机的声音大小调节功能一致</li>
+<li>APP使用过程中，通过通知栏通知打开其他应用APP，再回到APP中，检查是否影响正常功能使用</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="APP的兼容性测试"><a href="#APP的兼容性测试" class="headerlink" title="APP的兼容性测试"></a>APP的兼容性测试</h4><ol>
+<li>APP的版本兼容性<ul>
+<li>APP服务端兼容客户端的历史版本，检查新功能的服务端逻辑是否对旧版本有影响<br><br/><br/></li>
+</ul>
+</li>
+<li>第三方兼容性<ul>
+<li>第三方接口：APP中有调用登录或者支付等的第三方API接口（如在APP用微信或者QQ登录，用微信或者支付宝付款等），检查接口是否正常请求和返回</li>
+<li>第三方SDK（SDK 就是 Software Development Kit 的缩写，中文意思就是“软件开发工具包”）：APP的第三方SDK的使用，检查在不同操作系统或者不同的品牌手机上涉及的功能是否正常<br><br/><br/></li>
+</ul>
+</li>
+<li>手机操作系统兼容性<ul>
+<li>软件在不同的手机型号（iPhone 5、 iPhone 6/6 plus、iPhone 7/7 plus、iPhone 8/8 plus、iPhone X/XR等）上是否正常安装</li>
+<li>iOS的操作系统版本：iOS 9.0/iOS 10.0/iOS 11.0/iOS 12.0及其他小迭代系统版本还包括很多子版本号<br><br/><br/></li>
+</ul>
+</li>
+<li>屏幕分辨率兼容性<ul>
+<li>分辨率主要是指显示器所能显示的像素的多少，可以从显示分辨率与图像分辨率两个方向来分类。显示分辨率（屏幕分辨率）是屏幕图像的精密度，是指显示器所能显示的像素的多少。</li>
+<li>由于屏幕上的点、线和面都是由像素组成的，显示器可显示的像素越多，画面就越精细，同样的屏幕区域内能显示的信息也越多，所以分辨率是个非常重要的性能指标之一。</li>
+<li>可以把整个图像想象成是一个大型的棋盘，而分辨率的表示方式就是所有经线和纬线交叉点的数目。显示分辨率一定的情况下，显示屏越小图像越清晰，反之，显示屏大小固定时，显示分辨率越高图像越清晰。<br><br/><br/></li>
+</ul>
+</li>
+<li>网络兼容性<ul>
+<li>在WIFI/4G/弱网下，查看APP的UI和功能使用是否正常</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="APP的升级更新测试"><a href="#APP的升级更新测试" class="headerlink" title="APP的升级更新测试"></a>APP的升级更新测试</h4><ol>
+<li>强制更新<ul>
+<li>后台配置了强制更新，打开APP后，检查是否有强制更新提示，强制更新提示框是否可以关闭，强制更新是否有进度条显示</li>
+<li>强制更新过程中出现意外（如死机、断电、重启），再次打开APP，检查APP是否再次提示更新</li>
+<li>强制更新成功，打开APP，检查老账号的数据是否正常，老账号是否可以正常使用APP的功能</li>
+<li>强制更新成功，打开APP，检查已经剁掉的功能或者隐藏的功能，检查新增的功能是否按业务需求设计流程操作</li>
+<li>强制更新成功，打开APP，检查APP的版本号是否显示正确</li>
+<li>在不同的操作系统中，检查强制更新是否可以正常更新APP<br><br/><br/></li>
+</ul>
+</li>
+<li>非强制更新<ul>
+<li>后台配置了非强制更新，打开APP后，检查是否有非强制更新的提示，是否可以关闭提示</li>
+<li>关闭了更新提示，检查历史版本用户是否可以正常使用</li>
+<li>关闭了更新提示，再次打开APP，检查非强制更新的提示是否再弹（一般可以设置提示的频率）</li>
+<li>更新过程中出现意外（如死机、断电、重启），再次打开APP，检查APP是否再次提示更新，是否还能正常使用</li>
+<li>更新成功，打开APP，检查老账号的数据是否正常，老账号是否可以正常使用APP的功能</li>
+<li>更新成功，打开APP，检查已经剁掉的功能或者隐藏的功能，检查新增的功能是否按业务需求设计流程操作</li>
+<li>更新成功，打开APP，检查APP的版本号是否显示正确</li>
+<li>更新成功，检查新版本用户和老版本用户的交互是否正常（如互发消息/新版本的消息通知会不会发送到老版本上/新版本注册的用户登录到老版本上是否正常等）</li>
+<li>在不同的操作系统中，检查非强制更新是否可以正常更新APP</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="APP的消息通知测试"><a href="#APP的消息通知测试" class="headerlink" title="APP的消息通知测试"></a>APP的消息通知测试</h4><ol>
+<li>Badge徽章通知  标记通知是在程序图标的右上角显示的红色标记，里面显示的数字表示需要用户处理的通知的数量<ul>
+<li>应用图标上的计数，检查计数的逻辑是否和需求设计一致，检查计数的正确性</li>
+<li>未打开APP，查看计数的增加是否和需求设计一致</li>
+<li>打开APP，再返回到桌面，检查未读计数是否还显示，显示逻辑是否和需求一致<br><br/><br/></li>
+</ul>
+</li>
+<li>Sound  可以自定义音效，可以与其他通知类型搭配使用<ul>
+<li>声音显示的及时性，检查是否和需求设计一致</li>
+<li>提示的声音音效，检查是否和需求设计一致<br><br/><br/></li>
+</ul>
+</li>
+<li>Alert   强打断型提醒，在APP应用内，用户必须做出选择，否则强制提醒弹框不会关闭（如比赛邀请，APP版本强制更新等）<ul>
+<li>APP打开，在APP应用中操作或者浏览，检查Alert提醒弹框是否正常弹出，是否强制用户做出选择，是否做出选择后弹框关闭</li>
+<li>切换APP到后台，检查Alert提醒弹框是否会弹出</li>
+<li>APP从后台切换到前台，检查Alert提醒弹框是否会正常弹出</li>
+<li>Kill APP，再打开APP，检查Alert提醒弹框是否会弹出</li>
+<li>消息推送对象，检查消息推送的对象是否正确</li>
+<li>消息推送时间，检查消息推送的时间是否和需求一致</li>
+<li>同一手机，切换账号，打开APP，检查Alert提醒弹框是否会弹出</li>
+<li>同一账号，切换手机，打开APP，检查Alert提醒弹框是否会弹出<br><br/><br/></li>
+</ul>
+</li>
+<li>标记   一种不紧急的提醒方式，APP应用内的消息标记，部分用户有强迫清零的习惯<ul>
+<li>消息标记的数字（一般是计算的是未读消息），检查计数的正确性，计数最多显示多少条，超过后显示的合理性</li>
+<li>在APP应用内，收到新消息，检查计数的及时性和正确性</li>
+<li>在APP应用外，收到新消息，再打开APP，检查计数的正确性</li>
+<li>消息列表的未读已读消息，检查是否有明确的标识</li>
+<li>消息列表的更新机制，检查有新消息提醒，消息列表是否会自动更新</li>
+<li>消息已读后，检查未读消息的计数是否相应的减少</li>
+<li>消息列表新增了消息类别，检查未读计数中是否加入了该消息类别</li>
+<li>消息推送对象，检查消息推送的对象是否正确</li>
+<li>消息推送时间，检查消息推送的时间是否和需求一致</li>
+<li>同一手机，切换账号，打开APP，检查消息的计数是否和当前账号相对应</li>
+<li>同一账号，切换手机，打开APP，检查消息的计数是否和当前账号相对应<br><br/><br/></li>
+</ul>
+</li>
+<li>Toast   纯告知，不需要处理，一般是针对正在操作的反馈（一般显示在页面的顶部）<ul>
+<li>操作完成后，检查Toast消息是否及时弹出，检查Toast消息的文案是否正确</li>
+<li>Toast消息弹出后，检查Toast消息是否在几秒后自动消失<br><br/><br/></li>
+</ul>
+</li>
+<li>通知栏   Notification支持文字内容显示、震动、三色灯、铃声等多种提示形式，在默认情况下，Notification仅显示消息标题、消息内容、送达时间这3项内容<ul>
+<li>通知栏消息提醒，检查消息提醒的频率是否和需求设计一致</li>
+<li>通知栏消息提醒，检查消息显示的标题/内容/时间等是否和需求一致</li>
+<li>点击通知栏消息提醒，检查跳转的目标位置是否和需求一致，标记消息列表该消息是否显示为已读</li>
+<li>消息推送对象，检查消息推送的对象是否正确</li>
+<li>消息推送时间，检查消息推送的时间是否和需求一致</li>
+<li>系统通知权限，检查系统通知权限的设置是否和实际情况一</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="功能键测试"><a href="#功能键测试" class="headerlink" title="功能键测试"></a>功能键测试</h4><ol>
+<li>Home键<ul>
+<li>打开APP，点击Home键，检查APP是否切换到后台运行，检查APP后台运行的相关功能是否正常（如音乐播放）<br><br/><br/></li>
+</ul>
+</li>
+<li>音量键<ul>
+<li>打开APP，打开声音相关功能，物理调节音量键，检查声音是否会随物理调节变大变小</li>
+<li>打开APP，打开声音相关功能，系统声音设为静音，检查声音是否为静音<br><br/><br/></li>
+</ul>
+</li>
+<li>锁屏键<ul>
+<li>打开APP，锁屏，检查APP后台运行的相关功能是否正常（如音乐播放）</li>
+<li>打开APP，锁屏，解锁，检查APP运行是否正常<br><br/><br/></li>
+</ul>
+</li>
+<li>关机键<ul>
+<li>打开APP，关机，再开机，再打开APP，检查APP功能是否正常（特别是关机前正在付款等操作）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h4 id="手势测试"><a href="#手势测试" class="headerlink" title="手势测试"></a>手势测试</h4><ol>
+<li>见机行事<ul>
+<li>从屏幕左侧边缘向右滑动</li>
+<li>在屏幕上向左滑动</li>
+<li>从屏幕顶部向下滑动</li>
+<li>从屏幕底部向上滑动</li>
+<li>按住屏幕向下滑动</li>
+<li>在图片上双击</li>
+<li>按住图片下滑</li>
+<li>2根手指头分开和聚拢</li>
+<li>2根手指头按住屏幕旋转</li>
+<li>3根手指上滑（使用较少）</li>
+<li>4根手指上下/左右滑动（iPad）</li>
+<li>5根手指上下左右滑动（iPad）</li>
+<li>摇动手机</li>
+<li>长按屏幕</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/15/iphone-%E5%AE%89%E5%8D%93-%E8%80%97%E7%94%B5%E9%87%8F%E6%B5%8B%E8%AF%95/" rel="prev" title="iphone + 安卓 耗电量测试">
+      <i class="fa fa-chevron-left"></i> iphone + 安卓 耗电量测试
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#App%E7%9A%84%E5%AE%89%E8%A3%85%E5%92%8C%E5%8D%B8%E8%BD%BD"><span class="nav-number">1.</span> <span class="nav-text">App的安装和卸载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#App%E7%9A%84%E7%95%8C%E9%9D%A2%E6%B5%8B%E8%AF%95"><span class="nav-number">2.</span> <span class="nav-text">App的界面测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#App%E7%9A%84%E4%B8%9A%E5%8A%A1%E5%8A%9F%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">3.</span> <span class="nav-text">App的业务功能测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#App%E4%BA%A4%E5%8F%89%E4%BA%8B%E4%BB%B6%E6%B5%8B%E8%AF%95-%E4%BA%8B%E4%BB%B6%E5%86%B2%E7%AA%81%E6%B5%8B%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">App交叉事件测试   事件冲突测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#APP%E7%9A%84%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95"><span class="nav-number">5.</span> <span class="nav-text">APP的兼容性测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#APP%E7%9A%84%E5%8D%87%E7%BA%A7%E6%9B%B4%E6%96%B0%E6%B5%8B%E8%AF%95"><span class="nav-number">6.</span> <span class="nav-text">APP的升级更新测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#APP%E7%9A%84%E6%B6%88%E6%81%AF%E9%80%9A%E7%9F%A5%E6%B5%8B%E8%AF%95"><span class="nav-number">7.</span> <span class="nav-text">APP的消息通知测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E9%94%AE%E6%B5%8B%E8%AF%95"><span class="nav-number">8.</span> <span class="nav-text">功能键测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%8B%E5%8A%BF%E6%B5%8B%E8%AF%95"><span class="nav-number">9.</span> <span class="nav-text">手势测试</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ikefire</p>
+  <div class="site-description" itemprop="description">猪皮恶霸的妞妞猪。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ikefire</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
