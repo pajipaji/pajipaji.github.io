@@ -170,10 +170,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2020-10-16 15:28:32 / Modified: 17:03:23" itemprop="dateCreated datePublished" datetime="2020-10-16T15:28:32+08:00">2020-10-16</time>
+              <time title="Created: 2020-10-16 15:28:32" itemprop="dateCreated datePublished" datetime="2020-10-16T15:28:32+08:00">2020-10-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-10-19 13:29:12" itemprop="dateModified" datetime="2020-10-19T13:29:12+08:00">2020-10-19</time>
+              </span>
 
           
 
@@ -186,159 +192,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <hr>
-<h3 id="查询语句50题"><a href="#查询语句50题" class="headerlink" title="查询语句50题"></a>查询语句50题</h3><ol>
-<li>查询”01”课程比”02”课程成绩高的学生的信息及课程分数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	*</span><br><span class="line">FROM</span><br><span class="line">	Student,</span><br><span class="line">	(</span><br><span class="line">	SELECT</span><br><span class="line">		a.s_id,</span><br><span class="line">		a.c_id,</span><br><span class="line">		a.s_score,</span><br><span class="line">		b.c_id c_id2,</span><br><span class="line">		b.s_score s_score2</span><br><span class="line">	FROM</span><br><span class="line">		( SELECT * FROM Score WHERE c_id &#x3D; &#39;01&#39; ) AS a,</span><br><span class="line">		( SELECT * FROM Score WHERE c_id &#x3D; &#39;02&#39; ) AS b</span><br><span class="line">	WHERE</span><br><span class="line">		a.s_id &#x3D; b.s_id</span><br><span class="line">		AND a.s_score &gt; b.s_score</span><br><span class="line">	) AS A</span><br><span class="line">WHERE</span><br><span class="line">	Student.s_id &#x3D; A.s_id;</span><br></pre></td></tr></table></figure></li>
-<li>查询”01”课程比”02”课程成绩低的学生的信息及课程分数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">	*</span><br><span class="line">FROM</span><br><span class="line">	Student,</span><br><span class="line">	(</span><br><span class="line">	SELECT</span><br><span class="line">		a.s_id,</span><br><span class="line">		a.c_id,</span><br><span class="line">		a.s_score,</span><br><span class="line">		b.c_id c_id2,</span><br><span class="line">		b.s_score s_score2</span><br><span class="line">	FROM</span><br><span class="line">		( SELECT * FROM Score WHERE c_id &#x3D; &#39;01&#39; ) AS a,</span><br><span class="line">		( SELECT * FROM Score WHERE c_id &#x3D; &#39;02&#39; ) AS b</span><br><span class="line">	WHERE</span><br><span class="line">		a.s_id &#x3D; b.s_id</span><br><span class="line">		AND a.s_score &lt; b.s_score</span><br><span class="line">	) AS A</span><br><span class="line">WHERE</span><br><span class="line">	Student.s_id &#x3D; A.s_id;</span><br></pre></td></tr></table></figure></li>
-<li>查询平均成绩大于等于60分的同学的学生编号和学生姓名和平均成绩</li>
-<li>查询平均成绩小于60分的同学的学生编号和学生姓名和平均成绩        – (包括有成绩的和无成绩的)</li>
-<li>查询所有同学的学生编号、学生姓名、选课总数、所有课程的总成绩</li>
-<li>查询”李”姓老师的数量</li>
-<li>查询学过”张三”老师授课的同学的信息</li>
-<li>查询没学过”张三”老师授课的同学的信息</li>
-<li>查询学过编号为”01”并且也学过编号为”02”的课程的同学的信息</li>
-<li>查询学过编号为”01”但是没有学过编号为”02”的课程的同学的信息</li>
-<li>查询没有学全所有课程的同学的信息</li>
-<li>查询至少有一门课与学号为”01”的同学所学相同的同学的信息</li>
-<li>查询和”01”号的同学学习的课程完全相同的其他同学的信息</li>
-<li>查询没学过”张三”老师讲授的任一门课程的学生姓名</li>
-<li>查询两门及其以上不及格课程的同学的学号，姓名及其平均成绩</li>
-<li>检索”01”课程分数小于60，按分数降序排列的学生信息</li>
-<li>按平均成绩从高到低显示所有学生的所有课程的成绩以及平均成绩</li>
-<li>查询各科成绩最高分、最低分和平均分：以如下形式显示：课程ID，课程name，最高分，最低分，平均分，及格率，中等率，优良率，优秀率– 及格为&gt;=60，中等为：70-80，优良为：80-90，优秀为：&gt;=90</li>
-<li>按各科成绩进行排序，并显示排名(实现不完全)</li>
-<li>查询学生的总成绩并进行排名</li>
-<li>查询不同老师所教不同课程平均分从高到低显示</li>
-<li>查询所有课程的成绩第2名到第3名的学生信息及该课程成绩</li>
-<li>统计各科成绩各分数段人数：课程编号,课程名称,[100-85],[85-70],[70-60],[0-60]及所占百分比</li>
-<li>查询学生平均成绩及其名次</li>
-<li>查询各科成绩前三名的记录</li>
-<li>查询每门课程被选修的学生数</li>
-<li>查询出只有两门课程的全部学生的学号和姓名</li>
-<li>查询男生、女生人数</li>
-<li>查询名字中含有”风”字的学生信息</li>
-<li>查询同名同性学生名单，并统计同名人数</li>
-<li>查询1990年出生的学生名单</li>
-<li>查询每门课程的平均成绩，结果按平均成绩降序排列，平均成绩相同时，按课程编号升序排列</li>
-<li>查询平均成绩大于等于85的所有学生的学号、姓名和平均成绩</li>
-<li>查询课程名称为”数学”，且分数低于60的学生姓名和分数</li>
-<li>查询所有学生的课程及分数情况；</li>
-<li>查询任何一门课程成绩在70分以上的姓名、课程名称和分数</li>
-<li>查询不及格的课程</li>
-<li>查询课程编号为01且课程成绩在80分以上的学生的学号和姓名</li>
-<li>求每门课程的学生人数</li>
-<li>查询选修”张三”老师所授课程的学生中，成绩最高的学生信息及其成绩</li>
-<li>查询不同课程成绩相同的学生的学生编号、课程编号、学生成绩</li>
-<li>查询每门功成绩最好的前两名</li>
-<li>统计每门课程的学生选修人数（超过5人的课程才统计）。要求输出课程号和选修人数，查询结果按人数降序排列，–     若人数相同，按课程号升序排列</li>
-<li>检索至少选修两门课程的学生学号</li>
-<li>查询选修了全部课程的学生信息</li>
-<li>查询各学生的年龄</li>
-<li>查询本周过生日的学生</li>
-<li>查询下周过生日的学生</li>
-<li>查询本月过生日的学生</li>
-<li>查询下月过生日的学生</li>
-</ol>
-<hr>
-<h3 id="设置慢查询"><a href="#设置慢查询" class="headerlink" title="设置慢查询"></a>设置慢查询</h3><p>开启慢查询日志，可以让MySQL记录下查询超过指定时间的语句，通过定位分析性能的瓶颈，才能更好的优化数据库系统的性能。</p>
-<ol>
-<li>slow_query_log 慢查询开启状态<ul>
-<li>执行 show variables like ‘slow_query%’;</li>
-<li>查看 slow_query_log 是off 还是 on</li>
-</ul>
-</li>
-<li>slow_query_log_file 慢查询日志存放的位置（我放桌面了，方便我看）<ul>
-<li>执行 set global slow_query_log_file = ‘/Users/admin/Desktop/slow.log’; 可以在桌面查看到log文件</li>
-</ul>
-</li>
-<li>long_query_time 查询超过多少秒才记录<ul>
-<li>执行 show variables like ‘long_query_time’; 查看设置的时间</li>
-<li>执行 set global long_query_time = 2; 设置最长时间,修改之后，新开一个窗口就修改成功了。</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="检查语句是否使用索引的方式"><a href="#检查语句是否使用索引的方式" class="headerlink" title="检查语句是否使用索引的方式"></a>检查语句是否使用索引的方式</h3><p>开慢查询去记录一些执行时间比较久的SQL语句，找出这些SQL语句并不意味着结束了，需要用 explain 解析这些SQL语句的执行计划，查看该SQL语句有没有使用上了索引，有没有做全表扫描。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">-- 实际SQL，查找用户名为“张三”的员工</span><br><span class="line">select * from teacher where name &#x3D; &#39;张三&#39;;</span><br><span class="line">-- 查看SQL是否使用索引，前面加上explain即可</span><br><span class="line">explain select * from teacher where name &#x3D; &#39;张三&#39;;</span><br></pre></td></tr></table></figure>
-<p><code>解释：</code></p>
-<ol>
-<li>expain出来的信息有10列。<ul>
-<li>id:选择标识符，SELECT的查询序列号<ul>
-<li>SELECT的查询序列号，SQL从大到小的执行</li>
-<li>在一整个嵌套的查询中<ul>
-<li>id相同时，执行顺序由上至下</li>
-<li>如果是子查询，id的序号会递增，id值越大优先级越高，越先被执行</li>
-<li>id如果相同，可以认为是一组，从上往下顺序执行；在所有组中，id值越大，优先级越高，越先执行</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>select_type:表示查询的类型<ul>
-<li>SIMPLE  simple(简单SELECT，不使用UNION或子查询等)</li>
-<li>PRIMARY  primary(子查询中最外层查询，查询中若包含任何复杂的子部分，最外层的select被标记为PRIMARY)</li>
-<li>UNION  union(UNION中的第二个或后面的SELECT语句)</li>
-<li>DEPENDENT UNION  dependent union(UNION中的第二个或后面的SELECT语句，取决于外面的查询)</li>
-<li>UNION RESULT   union result(UNION的结果，union语句中第二个select开始后面所有select)</li>
-<li>SUBQUERY  subquery(子查询中的第一个SELECT，结果不依赖于外部查询)</li>
-<li>DEPENDENT SUBQUERY  bependent(子查询中的第一个SELECT，依赖于外部查询)</li>
-<li>DERIVED  derived(派生表的SELECT, FROM子句的子查询)</li>
-<li>UNCACHEABLE SUBQUERY  uncacheable subquery(一个子查询的结果不能被缓存，必须重新评估外链接的第一行)</li>
-</ul>
-</li>
-<li>table:输出结果集的表<ul>
-<li>显示这一步所访问数据库中表名称,有时不是真实的表名字，可能是简称，也可能是第几步执行的结果的简称</li>
-</ul>
-</li>
-<li>partitions:匹配的分区</li>
-<li>type:表示表的连接类型<ul>
-<li>对表访问方式，又称“访问类型”。常用的类型有： ALL、index、range、 ref、eq_ref、const、system、NULL（从左到右，性能从差到好）<ul>
-<li>ALL：Full Table Scan， MySQL将遍历全表以找到匹配的行</li>
-<li>index: Full Index Scan，index与ALL区别为index类型只遍历索引树</li>
-<li>range:只检索给定范围的行，使用一个索引来选择行</li>
-<li>ref: 表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值</li>
-<li>eq_ref: 类似ref，区别就在使用的索引是唯一索引，对于每个索引键值，表中只有一条记录匹配，简单来说，就是多表连接中使用primary key或者 unique key作为关联条件</li>
-<li>const、system: 当MySQL对查询某部分进行优化，并转换为一个常量时，使用这些类型访问。如将主键置于where列表中，MySQL就能将该查询转换为一个常量，system是const类型的特例，当查询的表只有一行的情况下，使用system</li>
-<li>NULL: MySQL在优化过程中分解语句，执行时甚至不用访问表或索引，例如从一个索引列里选取最小值可以通过单独索引查找完成。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>possible_keys:表示查询时，可能使用的索引<ul>
-<li>指出MySQL能使用哪个索引在表中找到记录，查询涉及到的字段上若存在索引，则该索引将被列出，但不一定被查询使用（该查询可以利用的索引，如果没有任何索引显示 null）</li>
-</ul>
-</li>
-<li>key:表示实际使用的索引<ul>
-<li>key列显示MySQL实际决定使用的键（索引），必然包含在possible_keys中，如果没有选择索引，键是NULL。要想强制MySQL使用或忽视possible_keys列中的索引，在查询中使用FORCE INDEX、USE INDEX或者IGNORE INDEX</li>
-</ul>
-</li>
-<li>key_len:索引字段的长度</li>
-<li>ref:列与索引的比较<ul>
-<li>列与索引的比较，表示上述表的连接匹配条件，即哪些列或常量被用于查找索引列上的值</li>
-</ul>
-</li>
-<li>rows:扫描出的行数(估算的行数)<ul>
-<li>估算出结果集行数，表示MySQL根据表统计信息及索引选用情况，估算的找到所需的记录所需要读取的行数</li>
-</ul>
-</li>
-<li>filtered:按表条件过滤的行百分比</li>
-<li>Extra:执行情况的描述和说明</li>
-</ul>
-</li>
-</ol>
-<hr>
-<h3 id="建表（一般表是小写开头）"><a href="#建表（一般表是小写开头）" class="headerlink" title="建表（一般表是小写开头）"></a>建表（一般表是小写开头）</h3><ol>
-<li>学生表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;Student&#96;(</span><br><span class="line"></span><br><span class="line">&#96;s_id&#96; VARCHAR(20),</span><br><span class="line"></span><br><span class="line">&#96;s_name&#96; VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,</span><br><span class="line"></span><br><span class="line">&#96;s_birth&#96; VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,</span><br><span class="line"></span><br><span class="line">&#96;s_sex&#96; VARCHAR(10) NOT NULL DEFAULT &#39;&#39;,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(&#96;s_id&#96;)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
-<li>课程表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;Course&#96;(</span><br><span class="line"></span><br><span class="line">&#96;c_id&#96; VARCHAR(20),</span><br><span class="line"></span><br><span class="line">&#96;c_name&#96; VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,</span><br><span class="line"></span><br><span class="line">&#96;t_id&#96; VARCHAR(20) NOT NULL,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(&#96;c_id&#96;)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
-<li>教师表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;Teacher&#96;(</span><br><span class="line"></span><br><span class="line">&#96;t_id&#96; VARCHAR(20),</span><br><span class="line"></span><br><span class="line">&#96;t_name&#96; VARCHAR(20) NOT NULL DEFAULT &#39;&#39;,</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(&#96;t_id&#96;)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
-<li>成绩表<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE &#96;Score&#96;(</span><br><span class="line"></span><br><span class="line">&#96;s_id&#96; VARCHAR(20),</span><br><span class="line"></span><br><span class="line">&#96;c_id&#96; VARCHAR(20),</span><br><span class="line"></span><br><span class="line">&#96;s_score&#96; INT(3),</span><br><span class="line"></span><br><span class="line">PRIMARY KEY(&#96;s_id&#96;,&#96;c_id&#96;)</span><br><span class="line"></span><br><span class="line">);</span><br></pre></td></tr></table></figure></li>
-<li>插入学生表测试数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">insert into Student values(&#39;01&#39; , &#39;赵雷&#39; , &#39;1990-01-01&#39; , &#39;男&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;02&#39; , &#39;钱电&#39; , &#39;1990-12-21&#39; , &#39;男&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;03&#39; , &#39;孙风&#39; , &#39;1990-05-20&#39; , &#39;男&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;04&#39; , &#39;李云&#39; , &#39;1990-08-06&#39; , &#39;男&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;05&#39; , &#39;周梅&#39; , &#39;1991-12-01&#39; , &#39;女&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;06&#39; , &#39;吴兰&#39; , &#39;1992-03-01&#39; , &#39;女&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;07&#39; , &#39;郑竹&#39; , &#39;1989-07-01&#39; , &#39;女&#39;);</span><br><span class="line"></span><br><span class="line">insert into Student values(&#39;08&#39; , &#39;王菊&#39; , &#39;1990-01-20&#39; , &#39;女&#39;);</span><br></pre></td></tr></table></figure></li>
-<li>课程表测试数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert into Course values(&#39;01&#39; , &#39;语文&#39; , &#39;02&#39;);</span><br><span class="line"></span><br><span class="line">insert into Course values(&#39;02&#39; , &#39;数学&#39; , &#39;01&#39;);</span><br><span class="line"></span><br><span class="line">insert into Course values(&#39;03&#39; , &#39;英语&#39; , &#39;03&#39;);</span><br></pre></td></tr></table></figure></li>
-<li>教师表测试数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">insert into Teacher values(&#39;01&#39; , &#39;张三&#39;);</span><br><span class="line"></span><br><span class="line">insert into Teacher values(&#39;02&#39; , &#39;李四&#39;);</span><br><span class="line"></span><br><span class="line">insert into Teacher values(&#39;03&#39; , &#39;王五&#39;);</span><br></pre></td></tr></table></figure></li>
-<li>成绩表测试数据<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">insert into Score values(&#39;01&#39; , &#39;01&#39; , 80);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;01&#39; , &#39;02&#39; , 90);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;01&#39; , &#39;03&#39; , 99);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;02&#39; , &#39;01&#39; , 70);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;02&#39; , &#39;02&#39; , 60);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;02&#39; , &#39;03&#39; , 80);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;03&#39; , &#39;01&#39; , 80);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;03&#39; , &#39;02&#39; , 80);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;03&#39; , &#39;03&#39; , 80);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;04&#39; , &#39;01&#39; , 50);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;04&#39; , &#39;02&#39; , 30);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;04&#39; , &#39;03&#39; , 20);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;05&#39; , &#39;01&#39; , 76);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;05&#39; , &#39;02&#39; , 87);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;06&#39; , &#39;01&#39; , 31);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;06&#39; , &#39;03&#39; , 34);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;07&#39; , &#39;02&#39; , 89);</span><br><span class="line"></span><br><span class="line">insert into Score values(&#39;07&#39; , &#39;03&#39; , 98);</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<hr>
-
+          <p>顺序：select、from、where、group by、having</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/10/16/sql-50%E9%A2%98-%E7%B4%A2%E5%BC%95-%E5%BB%BA%E8%A1%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
