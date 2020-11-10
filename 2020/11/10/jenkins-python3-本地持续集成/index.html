@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.1.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="讲这个得讲三部分，一部分是git，一部分是jenkins，另外一部分是python3。我知道的也不是很精，所以就只讲一下我常用的命令和方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="jenkins+python3+本地持续集成">
+<meta property="og:url" content="http://example.com/2020/11/10/jenkins-python3-%E6%9C%AC%E5%9C%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/index.html">
+<meta property="og:site_name" content="Ikefire&#39;s Blog">
+<meta property="og:description" content="讲这个得讲三部分，一部分是git，一部分是jenkins，另外一部分是python3。我知道的也不是很精，所以就只讲一下我常用的命令和方法。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-11-10T11:14:43.000Z">
+<meta property="article:modified_time" content="2020-11-10T11:15:01.944Z">
+<meta property="article:author" content="Ikefire">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2020/11/10/jenkins-python3-%E6%9C%AC%E5%9C%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>jenkins+python3+本地持续集成 | Ikefire's Blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Ikefire's Blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2020/11/10/jenkins-python3-%E6%9C%AC%E5%9C%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Ikefire">
+      <meta itemprop="description" content="猪皮恶霸的妞妞猪。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Ikefire's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          jenkins+python3+本地持续集成
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2020-11-10 19:14:43 / Modified: 19:15:01" itemprop="dateCreated datePublished" datetime="2020-11-10T19:14:43+08:00">2020-11-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>讲这个得讲三部分，一部分是git，一部分是jenkins，另外一部分是python3。我知道的也不是很精，所以就只讲一下我常用的命令和方法。<a id="more"></a></p>
+<h3 id="git-github"><a href="#git-github" class="headerlink" title="git/github"></a>git/github</h3><h4 id="集中式和分布式"><a href="#集中式和分布式" class="headerlink" title="集中式和分布式"></a>集中式和分布式</h4><blockquote>
+<p>这两种明显的代表是 svn和git。虽然两个都是协作办公的工具，但是还是有些区别的。下面介绍svn和git的使用方法：也可以先看这个文章 <a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/896043488029600/896202780297248">https://www.liaoxuefeng.com/wiki/896043488029600/896202780297248</a></p>
+</blockquote>
+<ol>
+<li>svn<ul>
+<li>使用的时候必须先更新本地，然后在要修改的文件进行上锁，修改完毕后，commit到中央服务器，然后解开中央服务器上的锁。显而易见，只要有一个人上了锁，其他人上锁期间就没办法再使用被其他人上锁的文件。</li>
+</ul>
+</li>
+<li>git<ul>
+<li>直接下载远端到本地，修改，期间有别人提交，拉下来，和自己本地合并，提交到远端。<h4 id="git-命令"><a href="#git-命令" class="headerlink" title="git 命令"></a>git 命令</h4></li>
+</ul>
+</li>
+<li>更新git并重新指定版本<ul>
+<li>brew install git</li>
+<li>which git</li>
+<li>git –version</li>
+<li>brew link git –overwrite</li>
+<li>git –version</li>
+</ul>
+</li>
+<li>初始化本地，拉取远端分支<ul>
+<li>git init</li>
+<li>git clone git@githttpsxxx</li>
+</ul>
+</li>
+<li>本地修改代码后上传到远端<ul>
+<li>git status</li>
+<li>git branch -a</li>
+<li>q</li>
+<li>git checkout master/ed</li>
+<li>git add .</li>
+<li>git commit -m “xx”</li>
+<li>git pull –rebase origin master</li>
+<li>git push -u origin master</li>
+</ul>
+</li>
+<li>合并其他分支到本分支(master)<ul>
+<li>git checkout master</li>
+<li>git merge ed</li>
+<li>git push</li>
+</ul>
+</li>
+<li>git创建本地分支并推送到远端<ul>
+<li>git branch -a</li>
+<li>q</li>
+<li>git branch</li>
+<li>q</li>
+<li>git branch ed</li>
+<li>git checkout ed  / git checkout -b ed</li>
+<li>git branch -a</li>
+<li>git push origin ed / –all</li>
+<li>git branch -a</li>
+</ul>
+</li>
+<li>删除本地分支并同步到远端<ul>
+<li>git branch -d ed</li>
+<li>git push origin -delete ed</li>
+<li>git branch -dr origin/ed</li>
+</ul>
+</li>
+</ol>
+<h3 id="关于jenkins的下载和使用"><a href="#关于jenkins的下载和使用" class="headerlink" title="关于jenkins的下载和使用"></a>关于jenkins的下载和使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ol>
+<li>下载安装不说了，看这个博客 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhengzhihua/p/12134535.html">https://www.cnblogs.com/zhengzhihua/p/12134535.html</a><h4 id="系统管理这一栏的使用介绍"><a href="#系统管理这一栏的使用介绍" class="headerlink" title="系统管理这一栏的使用介绍"></a>系统管理这一栏的使用介绍</h4></li>
+<li>系统配置<ul>
+<li>GitHub -&gt; Github 服务器 -&gt; api url ：<a target="_blank" rel="noopener" href="https://api.github.com/">https://api.github.com</a> -&gt; 凭据 添加Jenkins -&gt; 类型Secret text 这里写github里面设置的密钥 -&gt; 连接测试 查看是否能连接上自己的git仓库</li>
+</ul>
+</li>
+<li>全具工具配置<ul>
+<li>下载jdk 把jdk的目录放上 /usr/libexec/java_home -V</li>
+<li>下载git 把git的目录放上 which git</li>
+</ul>
+</li>
+<li>插件管理  下载插件<ul>
+<li>Git Plugin<h3 id="python3"><a href="#python3" class="headerlink" title="python3"></a>python3</h3><h4 id="python3-特点"><a href="#python3-特点" class="headerlink" title="python3 特点"></a>python3 特点</h4></li>
+</ul>
+</li>
+<li>编码方式和性能<ul>
+<li>py3运行效率更快</li>
+<li>默认源文件编码ASCII变为UTF-8，以前文件前加入的coding=utf-8不再需要</li>
+<li>针对unicode的处理有了明显的改善，效率明显提升</li>
+</ul>
+</li>
+<li>数据类型和基本运算<ul>
+<li>int和long进行了统一，统一为int</li>
+<li>True、False、None都是关键词</li>
+<li>必须以b’…’表示二进制数据，可以使用u’..’表示字符串，不加u也表示字符串</li>
+<li>移除&lt;&gt;不等号，使用“!=”表示不等号关系<ul>
+<li>2!=3</li>
+<li>2&lt;&gt;3 #出现语法错误</li>
+</ul>
+</li>
+<li>调整除法符号‘/’的用法，只返回浮点数，要返回整数要使用“//”</li>
+<li>py3运算对数据的类型要求更加的严格  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def foo(test&#x3D;None):</span><br><span class="line">    if test is None:</span><br><span class="line">        print (test)</span><br><span class="line">foo()</span><br><span class="line">print (5&#x2F;2)   #浮点数</span><br><span class="line">print (5&#x2F;&#x2F;2)   #整数</span><br><span class="line">print (1&#x2F;3)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>print和exec用法<ul>
+<li>print是一个函数，不再是一个语句，其中不需要用空格，后面打印的内容需要有括号括起来</li>
+<li>exec函数用法发生变化  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def foo():</span><br><span class="line">    _local&#x3D;locals()</span><br><span class="line">    exec(&#39;a&#x3D;4&#39;,globals(),_local)</span><br><span class="line">    a&#x3D;_local[&#39;a&#39;]</span><br><span class="line">    print(a)</span><br><span class="line">foo()</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>input、bin、oct和for循环<ul>
+<li>raw_input统一为input。a=input(‘请输入:’)#这里不再需要一个有效的表达式，他的用法和raw_input相同</li>
+<li>for循环的变量不再泄露在全局变量中，此bug已修复</li>
+</ul>
+</li>
+<li>range和dict的变化<ul>
+<li>在python2中，range火xrange会创建一个列表。常出现在for循环、字典、列表中，但是py3中xrange改名为range，在python3中使用xrange会触发错误。同时range返回的是可迭代对象而不再是列表形式，要想使range的结果得到一个list数据必须要使用list(range(5))</li>
+<li>字典内的dict.iterkeys(),dict.itervalues(),dict.iteritems()被keys() and values() and items()所替代。他们的返回结果类似于集的可迭代对象，而不是键值对的列表。从而在不进行键和值条目复制的情况下就能对其执行set操作</li>
+</ul>
+</li>
+<li>python3具有单一的str类型，新增bytes类型</li>
+<li>输入和输出。<ul>
+<li>如果要对文本执行任何I/O操作，python3会强制用户使用文本模式，打开文件，如果不想使用默认编码utf-8通常需要指明所需的编码</li>
+<li>如果对二进制数据进行I/O操作，必须使用二进制模式打开文件或进行读写操作</li>
+</ul>
+</li>
+<li>迭代器<ul>
+<li>range在python3中返回颗迭代对象二不是列表，最大限度节约内存</li>
+<li>zip(),map(),filter(),key(),value()返回的均是可迭代对象</li>
+</ul>
+</li>
+<li>异常错误处理<ul>
+<li>必须使用关键词as,try 和except NameError as e语句</li>
+<li>raise触发语法用法的变化，python3只接受带括号的<h4 id="相关的python包-和-mac常用的安装工具"><a href="#相关的python包-和-mac常用的安装工具" class="headerlink" title="相关的python包 和 mac常用的安装工具"></a>相关的python包 和 mac常用的安装工具</h4></li>
+</ul>
+</li>
+<li>包<ul>
+<li>redis==2.10.6</li>
+<li>requests==2.9.1</li>
+</ul>
+</li>
+<li>工具<ul>
+<li>brew</li>
+<li>conda</li>
+<li>pip3<h3 id="综合，jenkins-python3-在本地持续集成"><a href="#综合，jenkins-python3-在本地持续集成" class="headerlink" title="综合，jenkins+python3+在本地持续集成"></a>综合，jenkins+python3+在本地持续集成</h3><h4 id="什么叫持续集成和为什么要持续集成"><a href="#什么叫持续集成和为什么要持续集成" class="headerlink" title="什么叫持续集成和为什么要持续集成"></a>什么叫持续集成和为什么要持续集成</h4></li>
+</ul>
+</li>
+<li>持续集成的概念<ul>
+<li>持续集成指的是，频繁地（一天多次）将代码集成到主干。</li>
+</ul>
+</li>
+<li>为什么要持续集成<ul>
+<li>快速发现错误。每完成一点更新，就集成到主干，可以快速发现错误，定位错误也比较容易。</li>
+<li>防止分支大幅偏离主干。如果不是经常集成，主干又在不断更新，会导致以后集成的难度变大，甚至难以集成。</li>
+<li>核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。<h4 id="持续集成的步骤"><a href="#持续集成的步骤" class="headerlink" title="持续集成的步骤"></a>持续集成的步骤</h4></li>
+</ul>
+</li>
+<li>持续集成的步骤<ul>
+<li>开发者向代码仓库提交代码</li>
+<li>代码仓库对commit操作配置了钩子（hook），只要提交代码或者合并进主干，就会跑自动化测试。（单元测试、集成测试、全链路测试）</li>
+<li>邮件通知测试结果。<h4 id="新建一个新的git项目、空白任务并运行"><a href="#新建一个新的git项目、空白任务并运行" class="headerlink" title="新建一个新的git项目、空白任务并运行"></a>新建一个新的git项目、空白任务并运行</h4></li>
+</ul>
+</li>
+<li>Jenkins -&gt; 新建任务 -&gt; 填写新任务的名字和选择任务模式（构建一个自由风格的项目）</li>
+<li>general配置 -&gt; 写简单的描述这个job是干什么的 -&gt; 丢弃构建 -&gt; 保持天数7 -&gt; 保持构建的最大数量50 -&gt; 剩余的参数依据实际情况勾选</li>
+<li>源码管理 -&gt; 选择git Repository URL    -&gt; Credentials 无 -&gt; 指定分支（为空时代表any）master -&gt; 源码库浏览器    自动</li>
+<li>构建触发器 -&gt; 轮询 -&gt; SCM H/10 * * * *</li>
+<li>构建环境 -&gt; Delete workspace before build starts -&gt; Add timestamps to the Console Output</li>
+<li>构建 -&gt; 执行shell  <code>（这里写在远端git上的执行的文件的路径）</code>   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;building...&quot;</span><br><span class="line">cat .&#x2F;testApi&#x2F;test_app.py</span><br></pre></td></tr></table></figure></li>
+<li>应用 -&gt; 保存</li>
+<li>立即构建 success 小太阳</li>
+<li>构建完成之后，要关注的就是如何写好自动化，加油<h3 id="测试或工作过程中最常用的几个linux命令"><a href="#测试或工作过程中最常用的几个linux命令" class="headerlink" title="测试或工作过程中最常用的几个linux命令"></a>测试或工作过程中最常用的几个linux命令</h3></li>
+<li>ls命令<ul>
+<li>ls命令是列出目录内容（List Directory Contents）的意思，运行它就是列出文件夹里的内容，可能是文件也可能是文件夹</li>
+<li>“ls -l”命令以详情模式（long listingfashion）列出文件夹的内容</li>
+<li>“ls -a”命令会列出文件夹里的所有内容，包括以“.”开头的隐藏的文件</li>
+</ul>
+</li>
+<li>cd命令<ul>
+<li>经常使用的“cd”命令代表改变目录，它在终端中改变工作目录来执行，复制、移动、读、写等待操作</li>
+<li>cd..   代表回到上一目录</li>
+<li>cd /   代表回到根目录</li>
+</ul>
+</li>
+<li>pwd命令<ul>
+<li>pwd 在终端中显示当前工作目录的全路径</li>
+</ul>
+</li>
+<li>history命令<ul>
+<li>“history”命令就是历史记录，它显示了在终端中所执行过的所有命令的历史</li>
+</ul>
+</li>
+<li>mkdir命令<ul>
+<li>“mkdir”（make directory）命令在命名路径下创建新的目录，然而如果目录已经存在了，那么他就会返回一个错误信息“不能创建文件夹，文件夹已经存在了”</li>
+</ul>
+</li>
+<li>touch命令<ul>
+<li>“touch”命令代表了将文件的范文和修改时间更新为当前时间，touch命令只会在文件不存在的时候才会创建它，如果文件已经存在了，他会更新时间戳，但是并不会改变文件的内容。</li>
+</ul>
+</li>
+<li>cat命令<ul>
+<li>“cat”代表了连接（Concatenation），连接两个或者更多文本文件或者以标准输出形式打印文件的内容</li>
+<li>root@xxx:~# cat a.txt b.txt c.txt d.txt adbd.txt</li>
+</ul>
+</li>
+<li>cp命令<ul>
+<li>“copy”就是复制，它会从一个地方复制一个文件到另一地方</li>
+<li>root@xxx:~#cp/home/user/Downloads abc.tar.gz /home/user/Desktop</li>
+<li>cp，在shell脚本中最常用的一个命令，而且它可以使用通配符，来定制所需要的文件的复制</li>
+</ul>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/16/sql-50%E9%A2%98-%E7%B4%A2%E5%BC%95-%E5%BB%BA%E8%A1%A8/" rel="prev" title="sql-50题-索引-建表">
+      <i class="fa fa-chevron-left"></i> sql-50题-索引-建表
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-github"><span class="nav-number">1.</span> <span class="nav-text">git&#x2F;github</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E4%B8%AD%E5%BC%8F%E5%92%8C%E5%88%86%E5%B8%83%E5%BC%8F"><span class="nav-number">1.1.</span> <span class="nav-text">集中式和分布式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#git-%E5%91%BD%E4%BB%A4"><span class="nav-number">1.2.</span> <span class="nav-text">git 命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E4%BA%8Ejenkins%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">关于jenkins的下载和使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86%E8%BF%99%E4%B8%80%E6%A0%8F%E7%9A%84%E4%BD%BF%E7%94%A8%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.</span> <span class="nav-text">系统管理这一栏的使用介绍</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python3"><span class="nav-number">3.</span> <span class="nav-text">python3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#python3-%E7%89%B9%E7%82%B9"><span class="nav-number">3.1.</span> <span class="nav-text">python3 特点</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9A%84python%E5%8C%85-%E5%92%8C-mac%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7"><span class="nav-number">3.2.</span> <span class="nav-text">相关的python包 和 mac常用的安装工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%BC%E5%90%88%EF%BC%8Cjenkins-python3-%E5%9C%A8%E6%9C%AC%E5%9C%B0%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="nav-number">4.</span> <span class="nav-text">综合，jenkins+python3+在本地持续集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E5%8F%AB%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E5%92%8C%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90"><span class="nav-number">4.1.</span> <span class="nav-text">什么叫持续集成和为什么要持续集成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%81%E7%BB%AD%E9%9B%86%E6%88%90%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="nav-number">4.2.</span> <span class="nav-text">持续集成的步骤</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84git%E9%A1%B9%E7%9B%AE%E3%80%81%E7%A9%BA%E7%99%BD%E4%BB%BB%E5%8A%A1%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="nav-number">4.3.</span> <span class="nav-text">新建一个新的git项目、空白任务并运行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E6%88%96%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B%E4%B8%AD%E6%9C%80%E5%B8%B8%E7%94%A8%E7%9A%84%E5%87%A0%E4%B8%AAlinux%E5%91%BD%E4%BB%A4"><span class="nav-number">5.</span> <span class="nav-text">测试或工作过程中最常用的几个linux命令</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Ikefire</p>
+  <div class="site-description" itemprop="description">猪皮恶霸的妞妞猪。</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ikefire</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
