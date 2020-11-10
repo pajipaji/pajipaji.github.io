@@ -28,7 +28,7 @@
 <meta property="og:description" content="讲这个得讲三部分，一部分是git，一部分是jenkins，另外一部分是python3。我知道的也不是很精，所以就只讲一下我常用的命令和方法。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-11-10T11:14:43.000Z">
-<meta property="article:modified_time" content="2020-11-10T11:18:43.382Z">
+<meta property="article:modified_time" content="2020-11-10T11:22:03.850Z">
 <meta property="article:author" content="Ikefire">
 <meta name="twitter:card" content="summary">
 
@@ -174,7 +174,7 @@
               <span class="post-meta-item-text">Posted on</span>
               
 
-              <time title="Created: 2020-11-10 19:14:43 / Modified: 19:18:43" itemprop="dateCreated datePublished" datetime="2020-11-10T19:14:43+08:00">2020-11-10</time>
+              <time title="Created: 2020-11-10 19:14:43 / Modified: 19:22:03" itemprop="dateCreated datePublished" datetime="2020-11-10T19:14:43+08:00">2020-11-10</time>
             </span>
 
           
@@ -198,9 +198,11 @@
 </ul>
 </li>
 <li>git<ul>
-<li>直接下载远端到本地，修改，期间有别人提交，拉下来，和自己本地合并，提交到远端。<h4 id="git-命令"><a href="#git-命令" class="headerlink" title="git 命令"></a>git 命令</h4></li>
+<li>直接下载远端到本地，修改，期间有别人提交，拉下来，和自己本地合并，提交到远端。</li>
 </ul>
 </li>
+</ol>
+<h4 id="git-命令"><a href="#git-命令" class="headerlink" title="git 命令"></a>git 命令</h4><ol>
 <li>更新git并重新指定版本<ul>
 <li>brew install git</li>
 <li>which git</li>
@@ -251,7 +253,9 @@
 </li>
 </ol>
 <h3 id="关于jenkins的下载和使用"><a href="#关于jenkins的下载和使用" class="headerlink" title="关于jenkins的下载和使用"></a>关于jenkins的下载和使用</h3><h4 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h4><ol>
-<li>下载安装不说了，看这个博客 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhengzhihua/p/12134535.html">https://www.cnblogs.com/zhengzhihua/p/12134535.html</a><h4 id="系统管理这一栏的使用介绍"><a href="#系统管理这一栏的使用介绍" class="headerlink" title="系统管理这一栏的使用介绍"></a>系统管理这一栏的使用介绍</h4></li>
+<li>下载安装不说了，看这个博客 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhengzhihua/p/12134535.html">https://www.cnblogs.com/zhengzhihua/p/12134535.html</a></li>
+</ol>
+<h4 id="系统管理这一栏的使用介绍"><a href="#系统管理这一栏的使用介绍" class="headerlink" title="系统管理这一栏的使用介绍"></a>系统管理这一栏的使用介绍</h4><ol>
 <li>系统配置<ul>
 <li>GitHub -&gt; Github 服务器 -&gt; api url ：<a target="_blank" rel="noopener" href="https://api.github.com/">https://api.github.com</a> -&gt; 凭据 添加Jenkins -&gt; 类型Secret text 这里写github里面设置的密钥 -&gt; 连接测试 查看是否能连接上自己的git仓库</li>
 </ul>
@@ -314,9 +318,11 @@
 </li>
 <li>异常错误处理<ul>
 <li>必须使用关键词as,try 和except NameError as e语句</li>
-<li>raise触发语法用法的变化，python3只接受带括号的<h4 id="相关的python包-和-mac常用的安装工具"><a href="#相关的python包-和-mac常用的安装工具" class="headerlink" title="相关的python包 和 mac常用的安装工具"></a>相关的python包 和 mac常用的安装工具</h4></li>
+<li>raise触发语法用法的变化，python3只接受带括号的</li>
 </ul>
 </li>
+</ol>
+<h4 id="相关的python包-和-mac常用的安装工具"><a href="#相关的python包-和-mac常用的安装工具" class="headerlink" title="相关的python包 和 mac常用的安装工具"></a>相关的python包 和 mac常用的安装工具</h4><ol>
 <li>包<ul>
 <li>redis==2.10.6</li>
 <li>requests==2.9.1</li>
@@ -337,15 +343,19 @@
 <li>为什么要持续集成<ul>
 <li>快速发现错误。每完成一点更新，就集成到主干，可以快速发现错误，定位错误也比较容易。</li>
 <li>防止分支大幅偏离主干。如果不是经常集成，主干又在不断更新，会导致以后集成的难度变大，甚至难以集成。</li>
-<li>核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。<h4 id="持续集成的步骤"><a href="#持续集成的步骤" class="headerlink" title="持续集成的步骤"></a>持续集成的步骤</h4></li>
+<li>核心措施是，代码集成到主干之前，必须通过自动化测试。只要有一个测试用例失败，就不能集成。</li>
 </ul>
 </li>
+</ol>
+<h4 id="持续集成的步骤"><a href="#持续集成的步骤" class="headerlink" title="持续集成的步骤"></a>持续集成的步骤</h4><ol>
 <li>持续集成的步骤<ul>
 <li>开发者向代码仓库提交代码</li>
 <li>代码仓库对commit操作配置了钩子（hook），只要提交代码或者合并进主干，就会跑自动化测试。（单元测试、集成测试、全链路测试）</li>
-<li>邮件通知测试结果。<h4 id="新建一个新的git项目、空白任务并运行"><a href="#新建一个新的git项目、空白任务并运行" class="headerlink" title="新建一个新的git项目、空白任务并运行"></a>新建一个新的git项目、空白任务并运行</h4></li>
+<li>邮件通知测试结果。</li>
 </ul>
 </li>
+</ol>
+<h4 id="新建一个新的git项目、空白任务并运行"><a href="#新建一个新的git项目、空白任务并运行" class="headerlink" title="新建一个新的git项目、空白任务并运行"></a>新建一个新的git项目、空白任务并运行</h4><ol>
 <li>Jenkins -&gt; 新建任务 -&gt; 填写新任务的名字和选择任务模式（构建一个自由风格的项目）</li>
 <li>general配置 -&gt; 写简单的描述这个job是干什么的 -&gt; 丢弃构建 -&gt; 保持天数7 -&gt; 保持构建的最大数量50 -&gt; 剩余的参数依据实际情况勾选</li>
 <li>源码管理 -&gt; 选择git Repository URL    -&gt; Credentials 无 -&gt; 指定分支（为空时代表any）master -&gt; 源码库浏览器    自动</li>
